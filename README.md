@@ -30,5 +30,12 @@
 
 ## ● Une note rappelant les résultats d’analyse obtenus (point 4.a, 4.b, 4.c).
 - 4.a requête pour obtenir le chiffre d'affaires total
+```sql
+SELECT SUM(ventes.quantite*produits.prix) AS ventes_total 
+FROM ventes
+LEFT JOIN produits ON ventes.id_ref_produit = produits.id_ref_produit
+```
+soit 5268.78€
+
 - 4.b requête pour obtenir les ventes par produit
 - 4.c requête pour obtenir les ventes par région
