@@ -84,3 +84,16 @@ ORDER BY nombre_ventes DESC
 | 6 | Strasbourg | 11 |
 | 7 | Lille | 7 |
 <br>
+
+# Conclusion (analyse de la situation de ce mois de vente)
+
+Alors qu'ils ont le nombre de salariés le plus bas, Marseille vend 2x plus que la moyenne.
+Nous ne disposons pas de suffisement de parametres pour connaitre les raisons précises. (localité, type de produits, saison, etc)
+Si les produits sont des articles de plage, et que nous sommes en juin, la différence de performance pourrait facilement s'expliquer.
+Paris vend très peu.
+
+"Produit B" et "Produit C" malgrés leur prix attractif ne se vendent pas suffisement.
+leur faible chiffre de vente ne peut pas s'expliquer par un paramatre de localité ou de manque de performance des vendeurs.
+
+
+
