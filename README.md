@@ -14,6 +14,8 @@
 ### ● Le fichier yaml du Docker Compose
 
 ### ● Le(s) script(s) d'exécution pour la collecte, transformation, et import des données
+Script final: [api/fast.py](api/fast.py)
+Document de travail: [notebooks/simplon-ventes-PME.ipynb](notebooks/simplon-ventes-PME.ipynb)
 
 ### ● Le fichier sql
 [datasets/table.sqlite](datasets/table.sqlite)
