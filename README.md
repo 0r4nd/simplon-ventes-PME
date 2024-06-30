@@ -66,4 +66,21 @@ GROUP BY produits.nom
 <br>
 
 - 4.c requête pour obtenir les ventes par région
+```sql
+SELECT magasins.nom_ville,
+       SUM(ventes.quantite) AS nombre_ventes
+FROM magasins
+LEFT JOIN ventes ON (magasins.id_magasin = ventes.id_magasin)
+GROUP BY nom_ville
+ORDER BY nombre_ventes DESC
+```
+|   | nom | nombre_ventes |
+| - | ------------- | ------------- |
+| 1 | Marseille | 27 |
+| 2 | Lyon | 21 |
+| 3 | Paris | 20 |
+| 4 | Bordeaux | 19 |
+| 5 | Nantes | 17 |
+| 6 | Strasbourg | 11 |
+| 7 | Lille | 7 |
 <br>
