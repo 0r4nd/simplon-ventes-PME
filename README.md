@@ -8,7 +8,7 @@
 - Stocker les résultats des analyses.
 
 
-# Librables:
+# Livrables:
 
 ## ● Le schéma de l’architecture conçu
 
