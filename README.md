@@ -1,4 +1,11 @@
-# simplon-ventes-PME
+# Simplon-ventes-PME
+Objectifs visés
+- Créer et mettre en œuvre un environnement à deux services : un pour l’exécution des scripts (import de données) et un autre pour la base de données
+- Analyser un jeu de données et en expliquer ses caractéristiques
+- Créer une base de données adaptée pour le stockage du jeu de données
+- Importer les données
+- Réaliser un premier niveau d’analyses de données avec SQL
+- Stocker les résultats des analyses.
 
 # Librables:
 
