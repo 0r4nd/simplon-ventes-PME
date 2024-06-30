@@ -6,27 +6,33 @@
 - Importer les données
 - Réaliser un premier niveau d’analyses de données avec SQL
 - Stocker les résultats des analyses.
-
+<br>
 
 # Livrables:
 
 ## ● Le schéma de l’architecture conçu
+<br>
 
 ## ● Le schéma des données (sous une forme standard, MCD par exemple)
 <div style="text-align:center">
   <img src="schema_tables.png" width="600">
 </div>
+<br>
 
 ## ● Le Dockerfile
+<br>
 
 ## ● Le fichier yaml du Docker Compose
+<br>
 
 ## ● Le(s) script(s) d'exécution pour la collecte, transformation, et import des données
 - Script final: [api/fast.py](api/fast.py)
 - Document de travail: [notebooks/simplon-ventes-PME.ipynb](notebooks/simplon-ventes-PME.ipynb)
+<br>
 
 ## ● Le fichier sql
 [datasets/table.sqlite](datasets/table.sqlite)
+<br>
 
 ## ● Une note rappelant les résultats d’analyse obtenus (point 4.a, 4.b, 4.c).
 - 4.a requête pour obtenir le chiffre d'affaires total
@@ -38,7 +44,7 @@ LEFT JOIN produits ON ventes.id_ref_produit = produits.id_ref_produit
 |   | ventes_total |
 | - | ------------- |
 | 1 | 5268.78 |
-
+<br>
 
 - 4.b requête pour obtenir les ventes par produit
 ```sql
@@ -56,5 +62,7 @@ GROUP BY produits.nom
 | 3 | Produit C  | 15  | 29.99  |
 | 4 | Produit D  | 21  | 79.99  |
 | 5 | Produit E  | 35  | 39.99  |
+<br>
 
 - 4.c requête pour obtenir les ventes par région
+<br>
