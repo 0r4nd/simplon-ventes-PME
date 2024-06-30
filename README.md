@@ -50,18 +50,19 @@ LEFT JOIN produits ON ventes.id_ref_produit = produits.id_ref_produit
 ```sql
 SELECT produits.nom,
        SUM(ventes.quantite) AS nombre_ventes,
-       produits.prix AS prix_unitaire
+       produits.prix AS prix_unitaire,
+       SUM(ventes.quantite)*produits.prix AS prix_total
 FROM produits
 LEFT JOIN ventes ON (ventes.id_ref_produit = produits.id_ref_produit)
 GROUP BY produits.nom
 ```
-|   | nom | nombre_ventes | prix_unitaire |
-| - | ------------- | ------------- | ------------- |
-| 1 | Produit A  | 24  | 49.99  |
-| 2 | Produit B  | 27  | 19.99  |
-| 3 | Produit C  | 15  | 29.99  |
-| 4 | Produit D  | 21  | 79.99  |
-| 5 | Produit E  | 35  | 39.99  |
+|   | nom | nombre_ventes | prix_unitaire | prix_total |
+| - | ------------- | ------------- | ------------- | ------------- |
+| 1 | Produit A | 24 | 49.99 | 1199.76 |
+| 2 | Produit B | 27 | 19.99 | 539.73 |
+| 3 | Produit C | 15 | 29.99 | 449.85 |
+| 4 | Produit D | 21 | 79.99 | 1679.79 |
+| 5 | Produit E | 35 | 39.99 | 1399.65 |
 <br>
 
 - 4.c requête pour obtenir les ventes par région
