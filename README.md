@@ -29,3 +29,6 @@
 [datasets/table.sqlite](datasets/table.sqlite)
 
 ## ● Une note rappelant les résultats d’analyse obtenus (point 4.a, 4.b, 4.c).
+- 4.a requête pour obtenir le chiffre d'affaires total
+- 4.b requête pour obtenir les ventes par produit
+- 4.c requête pour obtenir les ventes par région
