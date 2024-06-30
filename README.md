@@ -35,7 +35,10 @@ SELECT SUM(ventes.quantite*produits.prix) AS ventes_total
 FROM ventes
 LEFT JOIN produits ON ventes.id_ref_produit = produits.id_ref_produit
 ```
-soit 5268.78€
+|   | ventes_total |
+| - | ------------- |
+| 1 | 5268.78 |
+
 
 - 4.b requête pour obtenir les ventes par produit
 ```sql
