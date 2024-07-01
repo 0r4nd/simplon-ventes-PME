@@ -93,17 +93,22 @@ ORDER BY nombre_ventes DESC
 
 
 # Utils
-launch api with uvicorn:
+Launch api with uvicorn:
 ```sh
   uvicorn simplon_vente_pme.api.fast:app --reload
 ```
 
-build docker image:
+Add project to env variables
+```sh
+GAR_IMAGE=simplon_vente_pme
+```
+
+Build docker image:
 ```sh
   docker build --tag=$GAR_IMAGE:dev .
 ```
 
-run docker image:
+Run docker image:
 ```sh
   docker run -it -e PORT=8000 -p 8000:8000 $GAR_IMAGE:dev
 ```
