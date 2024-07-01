@@ -90,3 +90,22 @@ ORDER BY nombre_ventes DESC
 | 6 | Strasbourg | 11 |
 | 7 | Lille | 7 |
 <br>
+
+
+# Utils
+launch api with uvicorn:
+```sh
+  uvicorn simplon_vente_pme.api.fast:app --reload
+```
+
+build docker image:
+```sh
+  docker build --tag=$GAR_IMAGE:dev .
+```
+
+run docker image:
+```sh
+  docker run -it -e PORT=8000 -p 8000:8000 $GAR_IMAGE:dev
+```
+
+
