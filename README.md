@@ -97,6 +97,7 @@ Launch api with uvicorn:
 ```sh
   uvicorn simplon_vente_pme.api.fast:app --reload
 ```
+<br><br>
 
 Add project to env variables
 ```sh
