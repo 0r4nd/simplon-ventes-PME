@@ -140,7 +140,7 @@ def insert_items_to_ventes(name_table, path="", list_date=[], list_id_ref_produi
 
 
 def convert_csv_to_sqlite(db_name = "table.sqlite"):
-    path_datasets = os.path.join(path_, "datasets")
+    path_datasets = os.path.join(path_, "..", "datasets")
     df_magasins = pd.read_csv(os.path.join(path_datasets, "magasins.csv"))
     df_produits = pd.read_csv(os.path.join(path_datasets, "produits.csv"))
     df_ventes = pd.read_csv(os.path.join(path_datasets, "ventes.csv"))
@@ -204,7 +204,7 @@ def index():
 
 @app.get("/total_sales")
 def total_sales():
-    path_table = os.path.join(os.path.join(path_,"datasets"), "table.sqlite")
+    path_table = os.path.join(os.path.join(path_, "..", "datasets"), "table.sqlite")
 
     with sqlite3.connect(path_table) as conn:
         cursor = conn.cursor()
@@ -221,7 +221,7 @@ def total_sales():
 
 @app.get("/sales_by_product")
 def sales_by_product():
-    path_table = os.path.join(os.path.join(path_,"datasets"), "table.sqlite")
+    path_table = os.path.join(os.path.join(path_, "..", "datasets"), "table.sqlite")
 
     with sqlite3.connect(path_table) as conn:
         cursor = conn.cursor()
@@ -240,7 +240,7 @@ def sales_by_product():
 
 @app.get("/sales_by_region")
 def sales_by_region():
-    path_table = os.path.join(os.path.join(path_,"datasets"), "table.sqlite")
+    path_table = os.path.join(os.path.join(path_, "..", "datasets"), "table.sqlite")
 
     with sqlite3.connect(path_table) as conn:
         cursor = conn.cursor()
