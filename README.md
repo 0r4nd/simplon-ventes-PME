@@ -11,6 +11,7 @@
 # Livrables:
 
 ## ● Le schéma de l’architecture conçu
+à ajouter (pour le moment il n'y a qu'un service qui fait la conversion des données au démarage, puis répond au requetes)
 <br>
 
 ## ● Le schéma des données (sous une forme standard, MCD par exemple)
@@ -24,7 +25,7 @@
 <br>
 
 ## ● Le fichier yaml du Docker Compose
-à finir
+à ajouter (pour le moment il n'y a qu'un service qui fait la conversion des données au démarage, puis répond au requetes)
 <br>
 
 ## ● Le(s) script(s) d'exécution pour la collecte, transformation, et import des données
