@@ -10,7 +10,7 @@ from timeit import default_timer as timer
 from datetime import datetime
 
 # load/save files
-import sqlite3
+import sqlite3, json
 
 # plot
 import matplotlib.pyplot as plt
@@ -145,7 +145,7 @@ def convert_csv_to_sqlite(db_name = "table.sqlite"):
     df_produits = pd.read_csv(os.path.join(path_datasets, "produits.csv"))
     df_ventes = pd.read_csv(os.path.join(path_datasets, "ventes.csv"))
 
-    create_table(db_name, path_datasets, True)
+    create_table(db_name, path_datasets, False)
 
     insert_items_to_magasin(db_name, path_datasets,
                             df_magasins['ID Magasin'].values.tolist(),
@@ -165,7 +165,25 @@ def convert_csv_to_sqlite(db_name = "table.sqlite"):
                             df_ventes['ID Magasin'].values.tolist())
 
 
-app = FastAPI()
+# utils
+def dict_fetchall(cursor):
+    desc = cursor.description
+    return [dict(zip([col[0] for col in desc], row))
+            for row in cursor.fetchall()]
+
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # on startup: create table from csv
+    print("startup")
+    convert_csv_to_sqlite("table.sqlite")
+    yield
+    # on shutdown
+    print("shutdown")
+
+
+app = FastAPI(lifespan=lifespan)
 
 app.add_middleware(
     CORSMiddleware,
@@ -175,37 +193,66 @@ app.add_middleware(
     allow_headers=["*"],  # Allows all headers
 )
 
-@asynccontextmanager
-async def lifespan(app: FastAPI):
-    # on startup: create table from csv
-    convert_csv_to_sqlite("table.sqlite")
-    yield
-    # on shutdown
+
+
 
 
 @app.get("/")
 def index():
     return {"greeting": "Hello world"}
 
+
 @app.get("/total_sales")
 def total_sales():
-    response = {
-        "sales": round(5.56565656, 3),
-    }
+    path_table = os.path.join(os.path.join(path_,"datasets"), "table.sqlite")
+
+    with sqlite3.connect(path_table) as conn:
+        cursor = conn.cursor()
+
+    cursor.execute("""
+        SELECT SUM(ventes.quantite*produits.prix) AS prix_total
+        FROM ventes
+        LEFT JOIN produits ON ventes.id_ref_produit = produits.id_ref_produit
+        """)
+    response = round(cursor.fetchone()[0], 3)
+    conn.close()
     return response
+
 
 @app.get("/sales_by_product")
-def sales_by_product(product):
-    response = {
-        "product": product,
-        "sales_count": 50,
-    }
+def sales_by_product():
+    path_table = os.path.join(os.path.join(path_,"datasets"), "table.sqlite")
+
+    with sqlite3.connect(path_table) as conn:
+        cursor = conn.cursor()
+
+    cursor.execute("""
+        SELECT produits.nom,
+            SUM(ventes.quantite) AS nombre_ventes
+        FROM produits
+        LEFT JOIN ventes ON (ventes.id_ref_produit = produits.id_ref_produit)
+        GROUP BY produits.nom
+        """)
+    response = dict_fetchall(cursor)
+    conn.close()
     return response
 
+
 @app.get("/sales_by_region")
-def sales_by_region(region):
-    response = {
-        "region": region,
-        "sales_count": 50,
-    }
+def sales_by_region():
+    path_table = os.path.join(os.path.join(path_,"datasets"), "table.sqlite")
+
+    with sqlite3.connect(path_table) as conn:
+        cursor = conn.cursor()
+
+    cursor.execute("""
+        SELECT magasins.nom_ville,
+            SUM(ventes.quantite) AS nombre_ventes
+        FROM magasins
+        LEFT JOIN ventes ON (magasins.id_magasin = ventes.id_magasin)
+        GROUP BY nom_ville
+        ORDER BY nombre_ventes DESC
+        """)
+    response = dict_fetchall(cursor)
+    conn.close()
     return response
