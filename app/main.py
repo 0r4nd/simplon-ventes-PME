@@ -204,7 +204,7 @@ def index():
 
 @app.get("/total_sales")
 def total_sales():
-    path_table = os.path.join(os.path.join(path_, "..", "datasets"), "table.sqlite")
+    path_table = os.path.join(os.path.join(path_, "..", "data"), "table.sqlite")
 
     with sqlite3.connect(path_table) as conn:
         cursor = conn.cursor()
@@ -221,7 +221,7 @@ def total_sales():
 
 @app.get("/sales_by_product")
 def sales_by_product():
-    path_table = os.path.join(os.path.join(path_, "..", "datasets"), "table.sqlite")
+    path_table = os.path.join(os.path.join(path_, "..", "data"), "table.sqlite")
 
     with sqlite3.connect(path_table) as conn:
         cursor = conn.cursor()
@@ -240,7 +240,7 @@ def sales_by_product():
 
 @app.get("/sales_by_region")
 def sales_by_region():
-    path_table = os.path.join(os.path.join(path_, "..", "datasets"), "table.sqlite")
+    path_table = os.path.join(os.path.join(path_, "..", "data"), "table.sqlite")
 
     with sqlite3.connect(path_table) as conn:
         cursor = conn.cursor()
