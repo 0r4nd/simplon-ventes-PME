@@ -11,7 +11,9 @@
 # Livrables:
 
 ## ● Le schéma de l’architecture conçu
-à ajouter (pour le moment il n'y a qu'un service qui fait la conversion des données au démarrage, puis renvois un json spécifique aux 3 requêtes)
+<div style="text-align:center">
+  <img src="schema_global.png" width="600">
+</div>
 <br>
 
 ## ● Le schéma des données (sous une forme standard, MCD par exemple)
