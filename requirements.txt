@@ -1,11 +1,7 @@
 
 # API
-pytz            # time zone management
 fastapi         # API framework
 uvicorn         # web server
-
-# utilities
-uvicorn
 
 # data science
 pandas
