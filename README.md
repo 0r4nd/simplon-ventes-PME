@@ -12,7 +12,7 @@
 
 ## ● Le schéma de l’architecture conçu
 <div style="text-align:center">
-  <img src="schema_global.png" width="600">
+  <img src="schema_services.png" width="600">
 </div>
 <br>
 
