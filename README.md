@@ -100,13 +100,13 @@ ORDER BY nombre_ventes DESC
 # Utils
 Launch api with uvicorn:
 ```sh
-  uvicorn simplon_vente_pme.api.fast:app --reload
+  uvicorn app.main:app --reload
 ```
 <br><br>
 
 Add project to env variables
 ```sh
-GAR_IMAGE=simplon_vente_pme
+GAR_IMAGE=app
 ```
 
 Build docker image:
