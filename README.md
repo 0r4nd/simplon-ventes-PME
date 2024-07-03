@@ -104,19 +104,17 @@ Launch api with uvicorn:
 ```
 <br><br>
 
-Add project to env variables
-```sh
-GAR_IMAGE=app
-```
-
 Build docker image:
 ```sh
-  docker build --tag=$GAR_IMAGE:dev .
+  docker build -t api .
 ```
 
 Run docker image:
 ```sh
-  docker run -it -e PORT=8000 -p 8000:8000 $GAR_IMAGE:dev
+  docker run -p 8000:8000 api
 ```
 
-
+Run docker image (interactively)
+```sh
+  docker run -it api sh
+```
