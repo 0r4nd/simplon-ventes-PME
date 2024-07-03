@@ -6,16 +6,9 @@ from fastapi.middleware.cors import CORSMiddleware
 
 # misc
 import os
-from timeit import default_timer as timer
-from datetime import datetime
 
 # load/save files
-import sqlite3, json
-
-# plot
-import matplotlib.pyplot as plt
-from matplotlib.patches import Rectangle
-from PIL import Image
+import sqlite3
 
 # datascience libs
 import pandas as pd
