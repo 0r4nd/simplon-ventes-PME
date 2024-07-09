@@ -31,7 +31,7 @@
 <br>
 
 ## ● Le(s) script(s) d'exécution pour la collecte, transformation, et import des données
-- Script final: [simplon_vente_pme/api/fast.py](simplon_vente_pme/api/fast.py)
+- Script final: [simplon_vente_pme/api/main.py](simplon_vente_pme/api/main.py)
 - Document de travail: [notebooks/simplon-ventes-PME.ipynb](notebooks/simplon-ventes-PME.ipynb)
 <br>
 
