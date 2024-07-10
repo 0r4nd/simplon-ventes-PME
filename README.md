@@ -27,7 +27,7 @@
 <br>
 
 ## ● Le fichier yaml du Docker Compose
-à ajouter (pour le moment il n'y a qu'un service qui fait la conversion des données au démarrage, puis renvois un json spécifique aux 3 requêtes)
+[docker-compose.yml](docker-compose.yml)
 <br>
 
 ## ● Le(s) script(s) d'exécution pour la collecte, transformation, et import des données
