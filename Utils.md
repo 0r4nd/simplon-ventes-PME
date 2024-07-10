@@ -30,4 +30,9 @@ Build
 ```sh
 docker-compose up --build
 ```
+
+état des services
+```sh
+docker-compose ps
+```
 <br>
