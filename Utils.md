@@ -1,10 +1,13 @@
 # Utils
+
+## Uvicorn
 Launch api with uvicorn:
 ```sh
   uvicorn app.main:app --reload
 ```
 <br><br>
 
+## Docker
 Build docker image:
 ```sh
   docker build -t api .
@@ -19,3 +22,11 @@ Run docker image (interactively)
 ```sh
   docker run -it api sh
 ```
+
+## docker-compose
+
+Build
+```sh
+docker-compose up --build
+```
+
