@@ -1,21 +1,18 @@
 
 services:
-  #db:
-    #build: ./
-    #restart: always
-    #ports:
-    #  - 1433:1433
-    #environment:
-    #  - SQLITE_PATH=/sqlite.db
-    #env_file:
-    #  - .env
-    #volumes:
-    #  - "./static:/app/app/static/"
-    #  - "./data/sqlite.db:/sqlite.db"
+  db:
+    image: nouchka/sqlite3:latest
+    container_name: mydb
+    ports:
+      - 1433:1433
+    environment:
+      - SQLITE_PATH=/sqlite.db
+    volumes:
+      - "./data/sqlite.db:/sqlite.db"
 
-  app:
+  web:
     build: ./
-    #restart: always
+    container_name: myapp
     ports:
       - 8000:8000
     command: sh -c "uvicorn app.main:app --port=8000 --host 0.0.0.0"
