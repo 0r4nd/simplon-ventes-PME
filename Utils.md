@@ -28,7 +28,7 @@ Run docker image (interactively)
 
 Build
 ```sh
-docker-compose up --build
+docker-compose up -d
 ```
 
 état des services
