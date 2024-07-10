@@ -42,7 +42,7 @@
 ## ● Une note rappelant les résultats d’analyse obtenus (point 4.a, 4.b, 4.c).
 - 4.a requête pour obtenir le chiffre d'affaires total
 
-avec docker en local: http://127.0.0.1:8000/total_sales
+http://127.0.0.1:8000/total_sales
 ```sql
 SELECT SUM(ventes.quantite*produits.prix) AS prix_total 
 FROM ventes
@@ -55,7 +55,7 @@ LEFT JOIN produits ON ventes.id_ref_produit = produits.id_ref_produit
 
 - 4.b requête pour obtenir les ventes par produit
 
-avec docker en local: http://127.0.0.1:8000/sales_by_product
+http://127.0.0.1:8000/sales_by_product
 ```sql
 SELECT produits.nom,
        SUM(ventes.quantite) AS nombre_ventes,
@@ -76,7 +76,7 @@ GROUP BY produits.nom
 
 - 4.c requête pour obtenir les ventes par région
 
-avec docker en local: http://127.0.0.1:8000/sales_by_region
+http://127.0.0.1:8000/sales_by_region
 ```sql
 SELECT magasins.nom_ville,
        SUM(ventes.quantite) AS nombre_ventes
