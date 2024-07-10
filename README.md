@@ -37,7 +37,7 @@
 
 ## ● Le fichier sql
 [datasets/table.sqlite](datasets/table.sqlite)
-<br>
+<br><br>
 
 ## ● Une note rappelant les résultats d’analyse obtenus (point 4.a, 4.b, 4.c).
 - 4.a requête pour obtenir le chiffre d'affaires total
