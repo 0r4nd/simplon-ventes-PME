@@ -10,17 +10,17 @@ Launch api with uvicorn:
 ## docker
 Build docker image:
 ```sh
-  docker build -t api .
+  docker build -t app .
 ```
 
 Run docker image:
 ```sh
-  docker run -p 8000:8000 api
+  docker run -p 8000:8000 app
 ```
 
 Run docker image (interactively)
 ```sh
-  docker run -it api sh
+  docker run -it app sh
 ```
 <br>
 
