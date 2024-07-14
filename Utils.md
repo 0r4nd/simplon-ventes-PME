@@ -22,6 +22,11 @@ Run docker image (interactively)
 ```sh
   docker run -it app sh
 ```
+
+Remove all containers + associated images (-v)
+```sh
+docker rm -v $(docker ps --filter status=exited -q)
+```
 <br>
 
 ## docker-compose
