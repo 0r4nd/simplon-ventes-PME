@@ -33,7 +33,10 @@ docker-compose up -d
 ```sh
 docker-compose -f docker-compose.yml up -d
 ```
-
+executer interactivement un service (après avoir lancé)
+```sh
+docker-compose exec db sh
+```
 état des services
 ```sh
 docker-compose ps
