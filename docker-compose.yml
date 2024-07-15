@@ -1,20 +1,34 @@
 
 services:
-  db:
-    image: nouchka/sqlite3:latest
-    container_name: mydb
-    ports:
-      - 1433:1433
-    environment:
-      - SQLITE_PATH=/sqlite.db
+  sqlite-container:
+    image: alpine:latest
+    container_name: sqlite-container
+    stdin_open: true
+    tty: true
     volumes:
-      - "./data/sqlite.db:/sqlite.db"
+      - ./data:/data
+    command: sh -c "apk --no-cache add sqlite && cp /data/init_db.sqlite /data/db.sqlite && sqlite3 /data/db.sqlite < /data/init_db.sql && tail -f /dev/null"
+    networks:
+      - mylocalnetwork
 
-  web:
+  app:
     build: ./
     container_name: myapp
     ports:
-      - 8000:8000
+      - "8000:8000"
     command: sh -c "uvicorn app.main:app --port=8000 --host 0.0.0.0"
     volumes:
       - .:/app
+      #- sqlite_data:/data/db
+    depends_on:
+      sqlite-container:
+        condition: service_started
+    networks:
+      - mylocalnetwork
+
+volumes:
+  sqlite_data:
+
+networks:
+  mylocalnetwork:
+    driver: bridge

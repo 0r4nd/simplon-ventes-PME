@@ -1,6 +1,7 @@
 
 brief/
 notebooks/
+data/
 app/__pycache__
 *.md
 *.png
