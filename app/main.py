@@ -15,7 +15,7 @@ import sqlite3
 # datascience libs
 import pandas as pd
 
-db_filename = "db.sql"
+db_filename = "db.sqlite"
 path_ = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
 
 
