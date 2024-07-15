@@ -36,7 +36,9 @@
 <br>
 
 ## ● Le fichier sql
-[datasets/table.sqlite](datasets/table.sqlite)
+[data/init_db.sql](data/init_db.sql)
+
+[data/table.sqlite](data/table.sqlite)
 <br><br>
 
 ## ● Une note rappelant les résultats d’analyse obtenus (point 4.a, 4.b, 4.c).
