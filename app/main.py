@@ -6,6 +6,8 @@ from fastapi.middleware.cors import CORSMiddleware
 
 # misc
 import os
+import requests
+from io import StringIO
 
 # load/save files
 import sqlite3
@@ -13,34 +15,8 @@ import sqlite3
 # datascience libs
 import pandas as pd
 
-
+db_filename = "db.sql"
 path_ = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
-
-
-
-def create_table(name_table, path="", remove_if_exist=False):
-    path_table = os.path.join(path, name_table)
-    if os.path.exists(path_table):
-        if remove_if_exist:
-            os.remove(path_table)
-        else:
-            return
-
-    with sqlite3.connect(path_table) as conn:
-        cursor = conn.cursor()
-
-    # magasins
-    cursor.execute(
-        "CREATE TABLE magasins (id INTEGER PRIMARY KEY AUTOINCREMENT, id_magasin INT, nom_ville TEXT, nombre_salaries INT)")
-    # produits
-    cursor.execute(
-        "CREATE TABLE produits (id INTEGER PRIMARY KEY AUTOINCREMENT, nom TEXT, id_ref_produit TEXT, prix FLOAT, stock INT)")
-    # ventes
-    cursor.execute(
-        "CREATE TABLE ventes (id INTEGER PRIMARY KEY AUTOINCREMENT, date DATE, id_ref_produit TEXT, quantite INT, id_magasin INT)")
-
-    conn.commit()
-    conn.close()
 
 
 def insert_items_to_magasin(name_table, path="", list_id_magasin=[], list_nom_villes=[], list_salaries=[]):
@@ -130,13 +106,26 @@ def insert_items_to_ventes(name_table, path="", list_date=[], list_id_ref_produi
     conn.close()
 
 
-def convert_csv_to_sqlite(db_name = "table.sqlite"):
+def convert_csv_to_sqlite(db_name = db_filename):
     path_datasets = os.path.join(path_, "data")
-    df_magasins = pd.read_csv(os.path.join(path_datasets, "magasins.csv"))
-    df_produits = pd.read_csv(os.path.join(path_datasets, "produits.csv"))
-    df_ventes = pd.read_csv(os.path.join(path_datasets, "ventes.csv"))
 
-    create_table(db_name, path_datasets, False)
+    # from files
+    #df_magasins = pd.read_csv(os.path.join(path_datasets, "magasins.csv"))
+    #df_produits = pd.read_csv(os.path.join(path_datasets, "produits.csv"))
+    #df_ventes = pd.read_csv(os.path.join(path_datasets, "ventes.csv"))
+
+    # from HTTP
+    res = requests.get("https://docs.google.com/spreadsheets/d/e/2PACX-1vSawI56WBC64foMT9pKCiY594fBZk9Lyj8_bxfgmq-8ck_jw1Z49qDeMatCWqBxehEVoM6U1zdYx73V/pub?gid=760830694&single=true&output=csv")
+    res.encoding = "utf-8"
+    df_ventes = pd.read_csv(StringIO(res.text))
+
+    res = requests.get("https://docs.google.com/spreadsheets/d/e/2PACX-1vSawI56WBC64foMT9pKCiY594fBZk9Lyj8_bxfgmq-8ck_jw1Z49qDeMatCWqBxehEVoM6U1zdYx73V/pub?gid=0&single=true&output=csv")
+    res.encoding = "utf-8"
+    df_produits = pd.read_csv(StringIO(res.text))
+
+    res = requests.get("https://docs.google.com/spreadsheets/d/e/2PACX-1vSawI56WBC64foMT9pKCiY594fBZk9Lyj8_bxfgmq-8ck_jw1Z49qDeMatCWqBxehEVoM6U1zdYx73V/pub?gid=714623615&single=true&output=csv")
+    res.encoding = "utf-8"
+    df_magasins = pd.read_csv(StringIO(res.text))
 
     insert_items_to_magasin(db_name, path_datasets,
                             df_magasins['ID Magasin'].values.tolist(),
@@ -162,19 +151,7 @@ def dict_fetchall(cursor):
     return [dict(zip([col[0] for col in desc], row))
             for row in cursor.fetchall()]
 
-
-
-@asynccontextmanager
-async def lifespan(app: FastAPI):
-    # on startup: create table from csv
-    print("startup")
-    convert_csv_to_sqlite("table.sqlite")
-    yield
-    # on shutdown
-    print("shutdown")
-
-
-app = FastAPI(lifespan=lifespan)
+app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
@@ -185,17 +162,14 @@ app.add_middleware(
 )
 
 
-
-
-
 @app.get("/")
 def index():
-    return {"greeting": "Hello world"}
+    return {"Hello": "World"}
 
 
 @app.get("/total_sales")
 def total_sales():
-    path_table = os.path.join(os.path.join(path_, "data"), "table.sqlite")
+    path_table = os.path.join(os.path.join(path_, "data"), db_filename)
 
     with sqlite3.connect(path_table) as conn:
         cursor = conn.cursor()
@@ -212,7 +186,7 @@ def total_sales():
 
 @app.get("/sales_by_product")
 def sales_by_product():
-    path_table = os.path.join(os.path.join(path_, "data"), "table.sqlite")
+    path_table = os.path.join(os.path.join(path_, "data"), db_filename)
 
     with sqlite3.connect(path_table) as conn:
         cursor = conn.cursor()
@@ -231,7 +205,7 @@ def sales_by_product():
 
 @app.get("/sales_by_region")
 def sales_by_region():
-    path_table = os.path.join(os.path.join(path_, "data"), "table.sqlite")
+    path_table = os.path.join(os.path.join(path_, "data"), db_filename)
 
     with sqlite3.connect(path_table) as conn:
         cursor = conn.cursor()
