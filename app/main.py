@@ -164,6 +164,7 @@ app.add_middleware(
 
 @app.get("/")
 def index():
+    convert_csv_to_sqlite(db_filename)
     return {"Hello": "World"}
 
 
